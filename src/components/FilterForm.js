@@ -46,14 +46,18 @@ function FilterForm() {
           />
         </label>
         <div>
-          <select
-            value={ column }
-            data-testid="column-filter"
-            onChange={ (e) => setColumn(e.target.value) }
-          >
-            {columnOptions
-              .map((colum) => <option value={ colum } key={ colum }>{colum}</option>)}
-          </select>
+          <label htmlFor="column-filter">
+            Filter by column:
+            <select
+              id="column-filter"
+              value={ column }
+              data-testid="column-filter"
+              onChange={ (e) => setColumn(e.target.value) }
+            >
+              {columnOptions
+                .map((colum) => <option value={ colum } key={ colum }>{colum}</option>)}
+            </select>
+          </label>
           <select
             value={ comparison }
             data-testid="comparison-filter"
@@ -78,13 +82,16 @@ function FilterForm() {
           </button>
         </div>
         <div>
-          <select
-            data-testid="column-sort"
-            onChange={ (e) => setSortColumn(e.target.value) }
-          >
-            {columnSortOptions
-              .map((colum) => <option value={ colum } key={ colum }>{colum}</option>)}
-          </select>
+          <label htmlFor="column-sort">
+            Sort by column:
+            <select
+              data-testid="column-sort"
+              onChange={ (e) => setSortColumn(e.target.value) }
+            >
+              {columnSortOptions
+                .map((colum) => <option value={ colum } key={ colum }>{colum}</option>)}
+            </select>
+          </label>
           <label htmlFor="upward">
             Upward:
             <input
