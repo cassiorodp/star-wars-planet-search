@@ -1,0 +1,20 @@
+.form-container {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.form-container div {
+  margin: 10px 0;
+}
+
+.main-container {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.main-container img {
+  border-radius: 10%;
+  width: 30vw;
+}

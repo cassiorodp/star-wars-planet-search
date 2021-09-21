@@ -1,0 +1,6 @@
+.selected-filter {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 10vw;
+}
