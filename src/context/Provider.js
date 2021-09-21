@@ -84,7 +84,7 @@ function Provider({ children }) {
       setLoading(true);
       const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
       const response = await (await fetch(url)).json();
-      await response.results.forEach(async (planet) => {
+      response.results.forEach(async (planet) => {
         delete planet.residents;
         delete planet.created;
         delete planet.edited;
@@ -93,11 +93,8 @@ function Provider({ children }) {
           const r = fetch(filmUrl).then((res) => res.json());
           return r;
         }));
-        // console.log(results);
         planet.films = results;
       });
-      // const test = await Promise.all(response.results);
-      // console.log(response);
       setLoading(false);
       setData({ ...response, results: response.results });
     };
