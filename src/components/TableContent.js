@@ -7,6 +7,7 @@ function TableContent() {
   const { data: { results }, filter } = useContext(TableContext);
 
   const [planets, setPlanets] = useState([]);
+  console.log(planets);
 
   // Filter Planets by Name
   const filterPlanetsByName = () => {
@@ -59,8 +60,6 @@ function TableContent() {
     return sortedPlanets;
   };
 
-  // useEffect(orderPlanets, [filter.filters.order]);
-
   // Order filters
   const orderFilters = () => {
     const filteredByName = filterPlanetsByName();
@@ -72,6 +71,8 @@ function TableContent() {
   useEffect(orderFilters, [filter]);
 
   const renderPlanetRow = () => planets.map((planet) => {
+    console.log(planet, 'planet');
+    console.log(planet.films, 'planet films');
     const plantetInfos = Object.values(planet);
     return (
       <tr key={ planet.name }>

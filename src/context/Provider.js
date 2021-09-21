@@ -84,12 +84,20 @@ function Provider({ children }) {
       setLoading(true);
       const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
       const response = await (await fetch(url)).json();
-      response.results.forEach((planet) => {
+      await response.results.forEach(async (planet) => {
         delete planet.residents;
         delete planet.created;
         delete planet.edited;
         delete planet.url;
+        const results = await Promise.all(planet.films.map((filmUrl) => {
+          const r = fetch(filmUrl).then((res) => res.json());
+          return r;
+        }));
+        // console.log(results);
+        planet.films = results;
       });
+      // const test = await Promise.all(response.results);
+      // console.log(response);
       setLoading(false);
       setData({ ...response, results: response.results });
     };
