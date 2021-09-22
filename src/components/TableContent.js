@@ -7,7 +7,17 @@ function TableContent() {
   const { data: { results }, filter } = useContext(TableContext);
 
   const [planets, setPlanets] = useState([]);
-  console.log(planets);
+
+  const [planetsMovies, setPlanetsMovies] = useState([]);
+
+  useEffect(() => {
+    const list = planets.map((planet) => planet.films.map((endpoint) => fetch(endpoint)
+      .then((response) => response.json())
+      .then((data) => data)));
+    Promise.all(
+      list.map((item) => Promise.all(item).then((listMovie) => listMovie)),
+    ).then((allListMovies) => setPlanetsMovies(allListMovies));
+  }, [planets]);
 
   // Filter Planets by Name
   const filterPlanetsByName = () => {
@@ -70,14 +80,35 @@ function TableContent() {
 
   useEffect(orderFilters, [filter]);
 
-  const renderPlanetRow = () => planets.map((planet) => {
-    console.log(planet, 'planet');
-    console.log(planet.films, 'planet films');
-    const plantetInfos = Object.values(planet);
+  // const renderPlanetRow = () => planets.map((planet) => {
+  //   console.log(planet, 'planet');
+  //   console.log(planet.films, 'planet films');
+  //   const plantetInfos = Object.values(planet);
+  //   return (
+  //     <tr key={ planet.name }>
+  //       {plantetInfos.map((info) => <td key={ info }>{info}</td>)}
+  //     </tr>);
+  // });
+
+  const renderPlanetRow = () => planets.map((planet, index) => {
+    const plantetInfos = Object.entries(planet);
+    console.log(plantetInfos);
     return (
       <tr key={ planet.name }>
-        {plantetInfos.map((info) => <td key={ info }>{info}</td>)}
-      </tr>);
+        {plantetInfos.map(([key, value]) => {
+          if (key === 'films' && planetsMovies.length) {
+            return (
+              <td key={ key }>
+                {planetsMovies[index].map((film) => (
+                  <p key={ film.title }>{film.title}</p>
+                ))}
+              </td>
+            );
+          }
+          return <td key={ key }>{value}</td>;
+        })}
+      </tr>
+    );
   });
 
   return (

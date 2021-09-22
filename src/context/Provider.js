@@ -89,11 +89,11 @@ function Provider({ children }) {
         delete planet.created;
         delete planet.edited;
         delete planet.url;
-        const results = await Promise.all(planet.films.map((filmUrl) => {
-          const r = fetch(filmUrl).then((res) => res.json());
-          return r;
-        }));
-        planet.films = results;
+        // const results = await Promise.all(planet.films.map((filmUrl) => {
+        //   const r = fetch(filmUrl).then((res) => res.json());
+        //   return r;
+        // }));
+        // planet.films = results;
       });
       setLoading(false);
       setData({ ...response, results: response.results });
