@@ -2,7 +2,7 @@
 
 ---
 <div align='center'>
-  <img src=/landing_page.png alt='landing-page' />
+  <img src=/src/images/landing-page.png alt='landing-page' width=80% />
 </div>
 
 ---
